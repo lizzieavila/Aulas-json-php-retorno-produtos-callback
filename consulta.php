@@ -10,9 +10,13 @@
         <main>
             <div id="janela_formulario">
                 <form id="pesquisarProdutos">
+
                     <label for="categorias">Categorias</label>
-                    <select id="categorias">
-                       
+                    <select id="categorias">                       
+                    </select>
+
+                    <label for="produtos">Categorias</label>
+                    <select id="produtos">                       
                     </select>
                 </form>
             </div>
@@ -40,15 +44,13 @@
                     data: 'categoriaID=' + categoriaID
                 })
                 .done(function(data) {
-                   console.log(JSON.parse(data));
+                    var produtos ="";
+                   $.each(JSON.parse(data),function(chave,valor){
+                    produtos +='<option value="'+ valor.produtoID +'">' + valor.nomeproduto + '</option>';
+                   });
+                   $('#produtos').html(produtos);
                 })
-                .fail(function() {
-                    console.log("erro");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
-                
+                          
             });
         </script>
         <script src="http://localhost/aulas/Aulas-json-php/unidade_11/retornar_categorias.php?callback=retornarCategorias"></script>
